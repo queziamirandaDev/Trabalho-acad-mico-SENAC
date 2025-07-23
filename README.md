@@ -1,255 +1,120 @@
-🧠 Conceito geral
+# Simulador de Lista de Tarefas
 
-° Neste trabalho apresentamos um simulador de lista de tarefas onde a pessoa cadastra as tarefas podendo ver totas  que cadastrou e, tambem, marcar as mesmas como concluida ou pendentes(sera possivel filtrar todas pendentes e concluidas)
+## 🧠 Conceito Geral
 
+Este projeto em Java simula uma lista de tarefas, permitindo ao usuário:
 
-🧱 1. Estrutura da Classe Tarefa
+* Cadastrar tarefas com descrição, status e data de entrega;
+* Visualizar todas as tarefas;
+* Atualizar o status das tarefas para "Pendente", "Em andamento", "Concluída" ou "Cancelada";
+* Filtrar tarefas por status;
+* Receber alerta de tarefas em atraso.
 
-1º Passo
+---
 
-°Criar uma classe tarefa com os seguintes Atributos:
+## 📂 Estrutura de Arquivos
 
-    public class Tarefa {
-    private String descricao;
-    private String status;
-    private LocalDate deadline; 
+```
+SimuladorTarefas/
+├── README.md           # Documentação do projeto
+└── src/
+    ├── Tarefas.java    # Superclasse: define atributos e comportamento básico de uma tarefa
+    ├── Personal.java   # Subclasse: tarefas pessoais
+    ├── Study.java      # Subclasse: tarefas de estudo
+    └── Main.java       # Classe principal: interface de usuário e lógica de controle
+```
 
-   
- °Fazer um construtor com todos os atributos:
+> **Observação:** Há referência a `Work` em `Main.java`. Caso exista `Work.java`, adicione no diretório `src/` como outra subclasse de `Tarefas`.
 
-     public Tarefa(String descricao, String status, LocalDate deadline) {
-        this.descricao = descricao;
-        this.status = status;
-        this.deadline = deadline;
-    }
-    
-  2º Passo
-  
-  °Método para exibir um resuo amigavel da tarefa:
+---
 
-    public String getResumoTarefa() {
-        return "To Do: " + descricao + "\n"
-                + "Status: " + status + "\n"
-                + "Deadline: " + deadline + "\n";
-    }
+## 🧱 Descrição dos Módulos
 
+* **Tarefas.java**
 
-3º Passo
+  * Atributos: `descricao`, `status`, `deadline` (`LocalDate`).
+  * Construtor: inicializa os campos.
+  * `getResumoTarefa()`: retorna informações básicas e alerta de atraso.
+  * Getters e setters para manipulação dos atributos.
 
- °Aplicando gets e sets:
- 
-       public String getDescricao() {
-        return descricao;
-    }
+* **Personal.java**
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
+  * Subclasse de `Tarefas` para tarefas pessoais.
+  * Herdar construtor de `Tarefas`.
 
-    // Getter e Setter para status
-    public String getStatus() {
-        return status;
-    }
+* **Study.java**
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
+  * Subclasse de `Tarefas` para tarefas de estudo.
+  * Herdar construtor de `Tarefas`.
 
-    // Getter e Setter para deadline
-    public LocalDate getDeadline() {
-        return deadline;
-    }
+* **Main.java**
 
-    public void setDeadline(LocalDate deadline) {
-        this.deadline = deadline;
-    }
-  
+  * Método `main`: ponto de entrada.
+  * Cria lista de `Tarefas` e pré-popula alguns exemplos de `Personal`, `Study` (e `Work`, se aplicável).
+  * Loop de menu com opções:
 
+    1. Adicionar nova tarefa (define tipo, descrição e deadline).
+    2. Listar todas as tarefas.
+    3. Atualizar status de uma tarefa existente.
+    4. Exibir somente tarefas pendentes.
+    5. Exibir somente tarefas em andamento.
+    6. Exibir somente tarefas concluídas.
+    7. Sair.
+  * Validações de entrada numérica e de formato de data.
 
-🧱 1. Estrutura da SubClasse Agenda
+---
 
-1º Passo
+## 🚀 Tecnologias
 
-  ° Criar a classe Agenda e adicionar o metodo Main e dentro desse metodo colocaremos a função scanner e ArrayList para a armazenagem:
+* Java 11+ (usa `java.time.LocalDate` e `java.time.format`)
+* Biblioteca padrão do JDK sem dependências adicionais
 
-    public class Agenda {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in); // Para leitura de dados do teclado
-        ArrayList<Tarefa> tarefas = new ArrayList<>(); 
+---
 
-2º Passo
+## ⚙️ Como Executar
 
-  ° Adicionando a varial int opcao faremos um loop com do While
+1. **Clone** o repositório:
 
-        int opcao;   // Armazena a opção escolhida pelo usuário no menu
+   ```bash
+   git clone https://seu-repositorio.git
+   cd SimuladorTarefas
+   ```
+2. **Compile** os arquivos Java:
 
-        // Loop principal do menu, só termina quando o usuário digita 0
-        do {
-            // Exibição do menu de opções
-            System.out.println("\nBem-vindo à sua agenda!");
-            System.out.println("--------------------------------");
-            System.out.println("1 - Adicionar tarefa");
-            System.out.println("2 - Listar todas");
-            System.out.println("3 - Marcar tarefa como concluída");
-            System.out.println("4 - Tarefas pendentes");
-            System.out.println("5 - Tarefas em andamento");
-            System.out.println("6 - Tarefas concluídas");
-            System.out.println("0 - Sair");
-            System.out.println("--------------------------------");
-            System.out.print("Escolha uma opção: ");
+   ```bash
+   javac src/*.java
+   ```
+3. **Execute** a aplicação:
 
-            // Valida se a entrada é um número inteiro
-            while (!scanner.hasNextInt()) {
-                System.out.println("Por favor, digite um número válido.");
-                scanner.next(); // Limpa entrada inválida
-            }
+   ```bash
+   java -cp src Main
+   ```
 
-3° Passo 
+---
 
-  ° Declarar a variavel opcao colocando a função scanner para ler a opção e usar os metodos  swith case 
-  (colocar os dados)  e try para aplicar um padrão de recebimento de informação no prompt, adicionamos tambem o If Else para termos condiçoes assim teremos controle das inforções que o usuario ira aplicar:
+## 🎯 Funcionalidades
 
-            opcao = scanner.nextInt(); // Lê a opção
-            scanner.nextLine(); // Limpa o buffer após a leitura do número
-            // Switch com as opções do menu
-            switch (opcao) {
+* **Adicionar Tarefa**: descrição, escolha de tipo e deadline;
+* **Listar Tarefas**: exibe todas com resumo e alerta de atraso;
+* **Atualizar Status**: altera estado de uma tarefa por índice;
+* **Filtrar Tarefas**: pendentes, em andamento ou concluídas;
+* **Sair**: encerra o programa.
 
-                // Adicionar uma nova tarefa
-                case 1:
-                    System.out.print("Digite a descrição da tarefa: ");
-                    String descricao = scanner.nextLine(); // Lê a descrição
+---
 
-                    System.out.print("Digite a data de entrega (formato: DD-MM-AAAA): ");
-                    String dataStr = scanner.nextLine(); // Lê a data como string
+## 🤝 Contribuição
 
-                    LocalDate deadline; // Variável para armazenar a data convertida
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy"); // Define o formato esperado
+1. Fork este projeto.
+2. Crie uma branch: `git checkout -b feature/nome-da-feature`.
+3. Commit suas mudanças: `git commit -m 'Descrição da mudança'`.
+4. Envie para o repositório remoto: `git push origin feature/nome-da-feature`.
+5. Abra um Pull Request descrevendo as alterações.
 
-                    try {
-                        deadline = LocalDate.parse(dataStr, formatter); // Converte a string em data
-                    } catch (DateTimeParseException e) {
-                        System.out.println("Formato de data inválido. Tarefa não adicionada.");
-                        break; // Volta ao menu se a data estiver errada
-                    }
-                   // Cria a tarefa usando os setters
-                    Tarefa novaTarefa = new Tarefa("", "", null);
-                    novaTarefa.setDescricao(descricao);
-                    novaTarefa.setStatus("Pendente");
-                    novaTarefa.setDeadline(deadline);
+---
 
-                    // Adiciona a tarefa à lista
-                    tarefas.add(novaTarefa);
+## 📄 Licença
 
-                    // Confirmação ao usuário
-                    System.out.println("Tarefa adicionada com sucesso! \n Data de entrega: " + novaTarefa.getDeadline().format(formatter));
-                    break;
-
-                // Listar todas as tarefas
-                case 2:
-                    System.out.println("\n--- Todas as tarefas ---");
-                    if (tarefas.isEmpty()) {
-                        System.out.println("Nenhuma tarefa cadastrada.");
-                    } else {
-                        for (int i = 0; i < tarefas.size(); i++) {
-                            System.out.println("[" + i + "]\n" + tarefas.get(i).getResumoTarefa());
-                        }
-                    }
-                    break;
-
-                // Atualizar o status de uma tarefa
-                case 3:
-                    if (tarefas.isEmpty()) {
-                        System.out.println("Nenhuma tarefa cadastrada.");
-                        break;
-                    }
-                     // Mostra a lista de tarefas com índice
-                    System.out.println("\nTarefas cadastradas:");
-                    for (int i = 0; i < tarefas.size(); i++) {
-                        Tarefa t = tarefas.get(i);
-                        System.out.println("[" + i + "] " + t.getDescricao() + " (" + t.getStatus() + ")");
-                    }
-
-                    // Solicita o índice da tarefa a ser modificada
-                    System.out.print("Digite o número da tarefa para atualizar o status: ");
-                    if (!scanner.hasNextInt()) {
-                        System.out.println("Entrada inválida.");
-                        scanner.nextLine(); // limpa o buffer
-                        break;
-                    }
-                    int indice = scanner.nextInt();
-                    scanner.nextLine();
-
-                    // Verifica se o índice é válido
-                    if (indice >= 0 && indice < tarefas.size()) {
-                        // Exibe as opções de status
-                        System.out.println("Escolha o novo status:");
-                        System.out.println("1 - Em andamento");
-                        System.out.println("2 - Concluída");
-                        System.out.println("3 - Cancelada");
-
-                        int escolhaStatus = scanner.nextInt();
-                        scanner.nextLine(); // limpa o buffer
-
-                        // Converte número em texto
-                        String novoStatus = switch (escolhaStatus) {
-                            case 1 -> "Em andamento";
-                            case 2 -> "Concluída";
-                            case 3 -> "Cancelada";
-                            default -> "Pendente";
-                        };
-
-                        tarefas.get(indice).setStatus(novoStatus); // Atualiza o status da tarefa
-                        System.out.println("Status atualizado para: " + novoStatus);
-                    } else {
-                        System.out.println("Índice inválido.");
-                    }
-                    break;
-
-                // Listar tarefas pendentes
-                case 4:
-                    System.out.println("\n--- Tarefas pendentes ---");
-                    for (Tarefa t : tarefas) {
-                        if (t.getStatus().equalsIgnoreCase("Pendente")) {
-                            System.out.println(t.getResumoTarefa());
-                        }
-                    }
-                    break;
-
-                // Listar tarefas em andamento
-                case 5:
-                    System.out.println("\n--- Tarefas em andamento ---");
-                    for (Tarefa t : tarefas) {
-                        if (t.getStatus().equalsIgnoreCase("Em andamento")) {
-                            System.out.println(t.getResumoTarefa());
-                        }
-                    }
-                    break;
-
-                // Listar tarefas concluídas
-                case 6:
-                    System.out.println("\n--- Tarefas concluídas ---");
-                    for (Tarefa t : tarefas) {
-                        if (t.getStatus().equalsIgnoreCase("Concluída")) {
-                            System.out.println(t.getResumoTarefa());
-                        }
-                    }
-                    break;
-
-                // Encerrar o programa
-                case 0:
-                    System.out.println("Encerrando o programa...");
-                    break;
-
-                // Opção inválida
-                default:
-                    System.out.println("Opção inválida.");
-            }
-
-        } while (opcao != 0); // Continua até o usuário digitar 0
-
-        scanner.close();
-
-            
+Este projeto está licenciado sob a [MIT License](LICENSE).
 
 
 
