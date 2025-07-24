@@ -116,6 +116,42 @@ SimuladorTarefas/
 
 Este projeto está licenciado sob a [MIT License](LICENSE).
 
+## 👩‍💻 Desenvolvido por:
+
+
+### Fernanda Ribeiro
+
+<a href="https://github.com/f3f3h" target="_blank">
+  <img src="https://img.shields.io/badge/GitHub-C71585?style=for-the-badge&logo=github&logoColor=white">
+</a>
+<a href="https://www.linkedin.com/in/f3f3h/" target="_blank">
+  <img src="https://img.shields.io/badge/LinkedIn-C71585?style=for-the-badge&logo=linkedin&logoColor=white">
+</a>
+
+---
+
+###  Quezia Miranda Pinheiro
+
+<a href="https://github.com/queziamirandaDev" target="_blank">
+  <img src="https://img.shields.io/badge/GitHub-C71585?style=for-the-badge&logo=github&logoColor=white">
+</a>
+<a href="https://www.linkedin.com/in/quezia-miranda/" target="_blank">
+  <img src="https://img.shields.io/badge/LinkedIn-C71585?style=for-the-badge&logo=linkedin&logoColor=white">
+</a>
+
+---
+
+###  Tiffany Ekesiani
+
+<a href="https://github.com/TiffanyEkesiani" target="_blank">
+  <img src="https://img.shields.io/badge/GitHub-C71585?style=for-the-badge&logo=github&logoColor=white">
+</a>
+<a href="https://www.linkedin.com/in/tiffanyekesiani/" target="_blank">
+  <img src="https://img.shields.io/badge/LinkedIn-C71585?style=for-the-badge&logo=linkedin&logoColor=white">
+</a>
+
+</div>
+
 
 
 
